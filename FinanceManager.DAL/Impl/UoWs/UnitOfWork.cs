@@ -18,7 +18,6 @@ namespace FinanceManager.DAL.Implementation
         }
 
         public IAccountRepository AccountRepository => _accountRepository ??= new AccountRepository(_context);
-
         public ICategoryRepository CategoryRepository => _categoryRepository ??= new CategoryRepository(_context);
         public ITransactionRepository TransactionRepository => _transactionRepository ??= new TransactionRepository(_context);
 
