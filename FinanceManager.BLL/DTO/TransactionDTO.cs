@@ -8,7 +8,7 @@ namespace FinanceManager.BLL.DTO
         
         public int? TargetId { get; set; }
         
-        public float Sum { get; set; }
+        public decimal Sum { get; set; }
         
         public int? CategoryId { get; set; }
     }

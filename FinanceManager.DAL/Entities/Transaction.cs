@@ -15,7 +15,7 @@ namespace FinanceManager.DAL.Entities
         public Account Target { get; set; }
         
         
-        public float Sum { get; set; }
+        public decimal Sum { get; set; }
         
         
         public int? CategoryId { get; set; }

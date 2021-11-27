@@ -12,11 +12,11 @@ namespace FinanceManager.DAL.Implementation
         private ICategoryRepository _categoryRepository;
         private ITransactionRepository _transactionRepository;
         private bool disposed = false;
-
-        public UnitOfWork(FinanceManagerDbContext context)
-        {
-            _context = context;
-        }
+        
+        // public UnitOfWork(FinanceManagerDbContext context)
+        // {
+        //     _context = context;
+        // }
         public UnitOfWork(DbContextOptions<FinanceManagerDbContext> options)
         {
             _context = new FinanceManagerDbContext(options);
