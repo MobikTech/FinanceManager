@@ -24,11 +24,16 @@ namespace FinanceManager.ConsoleApp
             
             
             
-            module.ServiceProvider.GetService<IAccountService>().CreateAccount(new AccountDTO()
+            // module.ServiceProvider.GetService<IAccountService>().CreateAccount(new AccountDTO()
+            // {
+            //     Id = 0,
+            //     Count = 1000,
+            //     Number = "1"
+            // });
+            module.ServiceProvider.GetService<ICategoryService>().CreateCategory(new CategoryDTO()
             {
                 Id = 0,
-                Count = 1000,
-                Number = "1"
+                Name = "products"
             });
             
         }
