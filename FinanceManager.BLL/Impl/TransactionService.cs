@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using FinanceManager.BLL.Abstraction;
 using FinanceManager.BLL.DTO;
@@ -19,7 +18,7 @@ namespace FinanceManager.BLL.Implementation
             _transactionMapper = transactionMapper;
         }
 
-        public TransactionDTO CreateTransaction(TransactionDTO dto)
+        public TransactionDTO MakeTransaction(TransactionDTO dto)
         {
             Transaction transaction = _transactionMapper.MapBack(dto);
             Transaction result = Database.TransactionRepository.Create(transaction);
@@ -32,48 +31,45 @@ namespace FinanceManager.BLL.Implementation
             return _transactionMapper.Map(result);
         }
 
-        public TransactionDTO GetTransaction(int id)
+        public decimal CheckIncome(int categoryId, int accountId)
         {
-            Transaction result = Database.TransactionRepository.GetById(id);
-            if (result == null)
-            {
-                throw new NotImplementedException();
-            }
-
-            return _transactionMapper.Map(result);
+            decimal totalIncome = Database.TransactionRepository.GetAll()
+                .Where(transaction => transaction.CategoryId == categoryId)
+                .Where(transaction => transaction.TargetId == accountId)
+                .Select(transaction => transaction.Sum)
+                .Sum();
+            return totalIncome;
         }
 
-        public IEnumerable<TransactionDTO> GetAllTransactions()
+        public decimal CheckCosts(int categoryId, int accountId)
         {
-            List<Transaction> result = Database.TransactionRepository.GetAll(); 
-            if (result == null)
-            {
-                throw new NotImplementedException();
-            }
-            return result.Select(_transactionMapper.Map);
+            decimal totalCosts = Database.TransactionRepository.GetAll()
+                .Where(transaction => transaction.CategoryId == categoryId)
+                .Where(transaction => transaction.SourceId == accountId)
+                .Select(transaction => transaction.Sum)
+                .Sum();
+            return totalCosts;
         }
 
-        public void UpdateTransaction(TransactionDTO dto)
-        {
-            Transaction transaction = Database.TransactionRepository.GetById(dto.Id);
-            if (transaction == null)
-            {
-                throw new NotImplementedException();
-            }
-            transaction = _transactionMapper.MapUpdate(dto, transaction);
-            Database.TransactionRepository.Update(transaction);
-            Database.Save();
-        }
+        // public TransactionDTO GetTransaction(int id)
+        // {
+        //     Transaction result = Database.TransactionRepository.GetById(id);
+        //     if (result == null)
+        //     {
+        //         throw new NotImplementedException();
+        //     }
+        //
+        //     return _transactionMapper.Map(result);
+        // }
 
-        public void DeleteTransaction(int id)
-        {
-            Transaction transaction = Database.TransactionRepository.GetById(id);
-            if (transaction == null)
-            {
-                throw new NotImplementedException();
-            }
-            Database.TransactionRepository.Delete(transaction);
-            Database.Save();
-        }
+        // public IEnumerable<TransactionDTO> GetAllTransactions()
+        // {
+        //     List<Transaction> result = Database.TransactionRepository.GetAll(); 
+        //     if (result == null)
+        //     {
+        //         throw new NotImplementedException();
+        //     }
+        //     return result.Select(_transactionMapper.Map);
+        // }
     }
 }

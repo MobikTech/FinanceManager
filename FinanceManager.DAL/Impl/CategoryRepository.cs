@@ -7,5 +7,9 @@ namespace FinanceManager.DAL.Implementation
     public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
     {
         public CategoryRepository(FinanceManagerDbContext context) : base(context) { }
+        public Category GetCategoryByName(string name)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

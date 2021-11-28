@@ -19,7 +19,6 @@ namespace FinanceManager.BLL.Mappers
         {
             return new Account()
             {
-                Id = model.Id,
                 Count = model.Count,
                 Number = model.Number
             };

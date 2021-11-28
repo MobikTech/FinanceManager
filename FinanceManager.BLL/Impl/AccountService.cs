@@ -32,9 +32,13 @@ namespace FinanceManager.BLL.Implementation
             return _accountMapper.Map(result);
         }
 
-        public AccountDTO GetAccount(int id)
+        public AccountDTO CheckAccountCount(AccountDTO dto)
         {
-            Account result = Database.AccountRepository.GetById(id);
+            if (dto.Number == null)
+            {
+                throw new NotImplementedException();
+            }
+            Account result = Database.AccountRepository.GetByNumber(dto.Number);
             if (result == null)
             {
                 throw new NotImplementedException();
@@ -52,22 +56,31 @@ namespace FinanceManager.BLL.Implementation
             }
             return result.Select(_accountMapper.Map);
         }
+        
+        // public void UpdateCount(AccountDTO dto)
+        // {
+        //     if (dto.Number == null)
+        //     {
+        //         throw new NotImplementedException();
+        //     }
+        //     Account account = Database.AccountRepository.GetByNumber(dto.Number);
+        //     if (account == null)
+        //     {
+        //         throw new NotImplementedException();
+        //     }
+        //
+        //     account.Count = dto.Count;
+        //     Database.AccountRepository.Update(account);
+        //     Database.Save();
+        // }
 
-        public void UpdateAccount(AccountDTO dto)
+        public void DeleteAccount(AccountDTO dto)
         {
-            Account account = Database.AccountRepository.GetById(dto.Id);
-            if (account == null)
+            if (dto.Number == null)
             {
                 throw new NotImplementedException();
             }
-            account = _accountMapper.MapUpdate(dto, account);
-            Database.AccountRepository.Update(account);
-            Database.Save();
-        }
-
-        public void DeleteAccount(int id)
-        {
-            Account account = Database.AccountRepository.GetById(id);
+            Account account = Database.AccountRepository.GetByNumber(dto.Number);
             if (account == null)
             {
                 throw new NotImplementedException();

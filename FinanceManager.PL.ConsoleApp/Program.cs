@@ -30,12 +30,17 @@ namespace FinanceManager.ConsoleApp
             //     Count = 1000,
             //     Number = "1"
             // });
-            module.ServiceProvider.GetService<ICategoryService>().CreateCategory(new CategoryDTO()
+            // module.ServiceProvider.GetService<ICategoryService>().CreateCategory(new CategoryDTO()
+            // {
+            //     Id = 0,
+            //     Name = "products"
+            // });
+            module.ServiceProvider.GetService<ITransactionService>().MakeTransaction(new TransactionDTO()
             {
-                Id = 0,
-                Name = "products"
+                Sum = 70,
+                CategoryId = 1,
+                TargetId = 8
             });
-            
         }
     }
 }

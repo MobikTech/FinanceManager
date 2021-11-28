@@ -13,6 +13,7 @@ namespace FinanceManager.DAL.Implementation
         private ITransactionRepository _transactionRepository;
         private bool disposed = false;
         
+        // todo
         // public UnitOfWork(FinanceManagerDbContext context)
         // {
         //     _context = context;
