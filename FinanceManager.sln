@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceManager.PL.ConsoleAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceManager.Tests", "FinanceManager.Tests\FinanceManager.Tests.csproj", "{48319D1A-48BE-43E7-8715-467E7489EEE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceManager.PL", "FinanceManager.PL\FinanceManager.PL.csproj", "{5FB5FE85-440A-4202-9D61-D5B0F425F902}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceManager.PL.MVC", "FinanceManager.PL.MVC\FinanceManager.PL.MVC.csproj", "{5FB5FE85-440A-4202-9D61-D5B0F425F902}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

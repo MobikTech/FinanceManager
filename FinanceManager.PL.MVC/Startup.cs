@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FinanceManager.PL
+namespace FinanceManager.PL.MVC
 {
     public sealed class Startup
     {

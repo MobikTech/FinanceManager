@@ -1,4 +1,4 @@
-namespace FinanceManager.PL.ViewModels
+namespace FinanceManager.PL.MVC.ViewModels
 {
     public sealed class AccountViewModel
     {

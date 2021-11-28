@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using FinanceManager.BLL.Abstraction;
 
-namespace FinanceManager.PL.Controllers
+namespace FinanceManager.PL.MVC.Controllers
 {
     public sealed class TransactionController : Controller
     {
