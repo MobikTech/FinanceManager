@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+using System;
 
 namespace FinanceManager.DAL.Entities
 {
@@ -6,6 +6,10 @@ namespace FinanceManager.DAL.Entities
     {
         public int Id { get; set; }
         
+        public decimal Sum { get; set; }
+
+        
+        public DateTime? Date { get; set; }
 
         public int? SourceId { get; set; }
         public Account Source { get; set; }
@@ -13,9 +17,6 @@ namespace FinanceManager.DAL.Entities
         
         public int? TargetId { get; set; }
         public Account Target { get; set; }
-        
-        
-        public float Sum { get; set; }
         
         
         public int? CategoryId { get; set; }
