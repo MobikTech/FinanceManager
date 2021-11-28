@@ -1,6 +1,8 @@
+using System.Linq;
 using FinanceManager.DAL.Abstraction;
 using FinanceManager.DAL.DB;
 using FinanceManager.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinanceManager.DAL.Implementation
 {
@@ -10,7 +12,10 @@ namespace FinanceManager.DAL.Implementation
         
         public Account GetByNumber(string number)
         {
-            throw new System.NotImplementedException();
+            return DbSet
+                .Include(account => account.TransactionsAsSource)
+                .Include(account => account.TransactionsAsTarget)
+                .FirstOrDefault(account => account.Number == number);
         }
     }
 }

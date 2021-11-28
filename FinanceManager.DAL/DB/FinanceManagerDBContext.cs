@@ -8,6 +8,7 @@ namespace FinanceManager.DAL.DB
     {
         public FinanceManagerDbContext(DbContextOptions<FinanceManagerDbContext> options) : base(options)
         {
+            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 

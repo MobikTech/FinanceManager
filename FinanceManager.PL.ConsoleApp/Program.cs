@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using FinanceManager.BLL.Abstraction;
 using FinanceManager.BLL.DTO;
 using FinanceManager.BLL.Util;
@@ -19,26 +20,64 @@ namespace FinanceManager.PL.ConsoleApp
             ServiceModule module = new ServiceModule(connectionString);
 
             ServiceProvider serviceProvider = module.ServiceProvider;
+
+            IAccountService accountService = serviceProvider.GetService<IAccountService>();
+            ICategoryService categoryService = serviceProvider.GetService<ICategoryService>();
+            ITransactionService transactionService = serviceProvider.GetService<ITransactionService>();
             
             
-            
-            // module.ServiceProvider.GetService<IAccountService>().CreateAccount(new AccountDTO()
-            // {
-            //     Id = 0,
-            //     Count = 1000,
-            //     Number = "1"
-            // });
-            // module.ServiceProvider.GetService<ICategoryService>().CreateCategory(new CategoryDTO()
-            // {
-            //     Id = 0,
-            //     Name = "products"
-            // });
-            module.ServiceProvider.GetService<ITransactionService>().MakeTransaction(new TransactionDTO()
+            accountService.CreateAccount(new AccountDTO()
             {
-                Sum = 70,
-                CategoryId = 1,
-                TargetId = 8
+                Count = 1000,
+                Number = "1"
             });
+            
+            categoryService.CreateCategory(new CategoryDTO()
+            {
+                Name = "products"
+            });
+            categoryService.CreateCategory(new CategoryDTO()
+            {
+                Name = "salary"
+            });
+            categoryService.CreateCategory(new CategoryDTO()
+            {
+                Name = "youtube premium"
+            });
+            
+            transactionService.MakeTransaction(new TransactionDTO()
+            {
+                Sum = 90,
+                CategoryId = 1,
+                SourceId = 1
+            });
+            transactionService.MakeTransaction(new TransactionDTO()
+            {
+                Sum = 120,
+                CategoryId = 1,
+                SourceId = 1
+            });
+            transactionService.MakeTransaction(new TransactionDTO()
+            {
+                Sum = 10,
+                CategoryId = 2,
+                TargetId = 1
+            });
+            transactionService.MakeTransaction(new TransactionDTO()
+            {
+                Sum = 100,
+                CategoryId = 2,
+                TargetId = 1
+            });
+            transactionService.MakeTransaction(new TransactionDTO()
+            {
+                Sum = 80,
+                CategoryId = 3,
+                SourceId = 1
+            });
+            Console.WriteLine($"Total costs on products - {accountService.CheckCosts(1, 1)}");
+            Console.WriteLine($"Total income by salary - {accountService.CheckIncome(2, 1)}");
+            Console.WriteLine($"Total costs - {accountService.CheckCosts(1)}");
         }
     }
 }

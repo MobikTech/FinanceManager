@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using FinanceManager.BLL.DTO;
 
 namespace FinanceManager.BLL.Abstraction
@@ -7,13 +6,19 @@ namespace FinanceManager.BLL.Abstraction
     public interface IAccountService
     {
         public AccountDTO CreateAccount(AccountDTO dto);
-
-        public AccountDTO CheckAccountCount(AccountDTO dto);
         
+        public AccountDTO GetAccountById(int id);
+        public AccountDTO GetAccountByNumber(string number);
+
         public IEnumerable<AccountDTO> GetAllAccounts();
         
-        // public void UpdateCount(AccountDTO dto);
+        public decimal CheckIncome(int categoryId, int accountId);
+        public decimal CheckCosts(int categoryId, int accountId);
         
+        public decimal CheckIncome(int accountId);
+        
+        public decimal CheckCosts(int accountId);
+
         public void DeleteAccount(AccountDTO dto);
     }
 }

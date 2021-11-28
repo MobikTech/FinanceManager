@@ -19,7 +19,6 @@ namespace FinanceManager.BLL.Implementation
             _accountMapper = accountMapper;
         }
         
-        
         public AccountDTO CreateAccount(AccountDTO dto)
         {
             Account account = _accountMapper.MapBack(dto);
@@ -32,19 +31,26 @@ namespace FinanceManager.BLL.Implementation
             return _accountMapper.Map(result);
         }
 
-        public AccountDTO CheckAccountCount(AccountDTO dto)
+        public AccountDTO GetAccountById(int id)
         {
-            if (dto.Number == null)
-            {
-                throw new NotImplementedException();
-            }
-            Account result = Database.AccountRepository.GetByNumber(dto.Number);
-            if (result == null)
+            Account account = Database.AccountRepository.GetById(id);
+            if (account == null)
             {
                 throw new NotImplementedException();
             }
 
-            return _accountMapper.Map(result);
+            return _accountMapper.Map(account);
+        }
+        
+        public AccountDTO GetAccountByNumber(string number)
+        {
+            Account account = Database.AccountRepository.GetByNumber(number);
+            if (account == null)
+            {
+                throw new NotImplementedException();
+            }
+
+            return _accountMapper.Map(account);
         }
 
         public IEnumerable<AccountDTO> GetAllAccounts()
@@ -56,23 +62,43 @@ namespace FinanceManager.BLL.Implementation
             }
             return result.Select(_accountMapper.Map);
         }
-        
-        // public void UpdateCount(AccountDTO dto)
-        // {
-        //     if (dto.Number == null)
-        //     {
-        //         throw new NotImplementedException();
-        //     }
-        //     Account account = Database.AccountRepository.GetByNumber(dto.Number);
-        //     if (account == null)
-        //     {
-        //         throw new NotImplementedException();
-        //     }
-        //
-        //     account.Count = dto.Count;
-        //     Database.AccountRepository.Update(account);
-        //     Database.Save();
-        // }
+
+        public decimal CheckIncome(int categoryId, int accountId)
+        {
+            Account account = Database.AccountRepository.GetById(accountId);
+            decimal totalIncome = account.TransactionsAsTarget
+                .Where(transaction => transaction.CategoryId == categoryId)
+                .Select(transaction => transaction.Sum)
+                .Sum();
+            return totalIncome;
+        }
+        public decimal CheckCosts(int categoryId, int accountId)
+        {
+            Account account = Database.AccountRepository.GetById(accountId);
+            decimal totalIncome = account.TransactionsAsSource
+                .Where(transaction => transaction.CategoryId == categoryId)
+                .Select(transaction => transaction.Sum)
+                .Sum();
+            return totalIncome;
+        }
+
+        public decimal CheckIncome(int accountId)
+        {
+            Account account = Database.AccountRepository.GetById(accountId);
+            decimal totalIncome = account.TransactionsAsTarget
+                .Select(transaction => transaction.Sum)
+                .Sum();
+            return totalIncome;
+        }
+
+        public decimal CheckCosts(int accountId)
+        {
+            Account account = Database.AccountRepository.GetById(accountId);
+            decimal totalIncome = account.TransactionsAsSource
+                .Select(transaction => transaction.Sum)
+                .Sum();
+            return totalIncome;
+        }
 
         public void DeleteAccount(AccountDTO dto)
         {
