@@ -7,21 +7,12 @@ namespace FinanceManager.BLL.Mappers
     {
         public AccountDTO Map(Account entity)
         {
-            return new AccountDTO()
-            {
-                Id = entity.Id,
-                Count = entity.Count,
-                Number = entity.Number
-            };
+            throw new System.NotImplementedException();
         }
 
         public Account MapBack(AccountDTO model)
         {
-            return new Account()
-            {
-                Count = model.Count,
-                Number = model.Number
-            };
+            throw new System.NotImplementedException();
         }
 
         public Account MapUpdate(AccountDTO model, Account entity)

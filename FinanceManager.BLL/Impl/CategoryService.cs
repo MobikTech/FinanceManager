@@ -44,17 +44,6 @@ namespace FinanceManager.BLL.Implementation
             return _categoryMapper.Map(result);
         }
 
-        public CategoryDTO GetCategoryByName(string name)
-        {
-            Category result = Database.CategoryRepository.GetCategoryByName(name);
-            if (result == null)
-            {
-                throw new NotImplementedException();
-            }
-
-            return _categoryMapper.Map(result);
-        }
-
         public IEnumerable<CategoryDTO> GetAllCategories()
         {
             List<Category> result = Database.CategoryRepository.GetAll(); 

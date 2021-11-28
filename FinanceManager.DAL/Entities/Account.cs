@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace FinanceManager.DAL.Entities
 {
@@ -7,7 +8,7 @@ namespace FinanceManager.DAL.Entities
         public int Id { get; set; }
         public string Number { get; set; }
         
-        public decimal Count { get; set; }
+        public int Count { get; set; }
         
         public ICollection<Transaction> TransactionsAsSource { get; set; }
         

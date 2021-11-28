@@ -10,8 +10,6 @@ namespace FinanceManager.BLL.Abstraction
         
         public CategoryDTO GetCategory(int id);
         
-        public CategoryDTO GetCategoryByName(string name);
-
         public IEnumerable<CategoryDTO> GetAllCategories();
         
         public void UpdateCategory(CategoryDTO dto);

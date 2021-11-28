@@ -1,18 +1,19 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using FinanceManager.BLL.DTO;
 
 namespace FinanceManager.BLL.Abstraction
 {
     public interface ITransactionService
     {
-        public TransactionDTO MakeTransaction(TransactionDTO dto);
+        public TransactionDTO CreateTransaction(TransactionDTO dto);
         
-        // public TransactionDTO GetTransaction(int id);
+        public TransactionDTO GetTransaction(int id);
 
-        public decimal CheckIncome(int categoryId, int accountId);
+        public IEnumerable<TransactionDTO> GetAllTransactions();
         
-        public decimal CheckCosts(int categoryId, int accountId);
-
-        // public IEnumerable<TransactionDTO> GetAllTransactions();
+        public void UpdateTransaction(TransactionDTO dto);
         
+        public void DeleteTransaction(int id);
     }
 }

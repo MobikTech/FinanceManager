@@ -1,7 +1,6 @@
 using System;
 using FinanceManager.DAL.Abstraction;
 using FinanceManager.DAL.DB;
-using Microsoft.EntityFrameworkCore;
 
 namespace FinanceManager.DAL.Implementation
 {
@@ -12,15 +11,10 @@ namespace FinanceManager.DAL.Implementation
         private ICategoryRepository _categoryRepository;
         private ITransactionRepository _transactionRepository;
         private bool disposed = false;
-        
-        // todo
-        // public UnitOfWork(FinanceManagerDbContext context)
-        // {
-        //     _context = context;
-        // }
-        public UnitOfWork(DbContextOptions<FinanceManagerDbContext> options)
+
+        public UnitOfWork(FinanceManagerDbContext context)
         {
-            _context = new FinanceManagerDbContext(options);
+            _context = context;
         }
 
         public IAccountRepository AccountRepository => _accountRepository ??= new AccountRepository(_context);

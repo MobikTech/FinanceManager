@@ -7,27 +7,12 @@ namespace FinanceManager.BLL.Mappers
     {
         public TransactionDTO Map(Transaction entity)
         {
-            return new TransactionDTO()
-            {
-                Id = entity.Id,
-                Sum = entity.Sum,
-                Date = entity.Date,
-                CategoryId = entity.CategoryId,
-                SourceId = entity.SourceId,
-                TargetId = entity.TargetId
-            };
+            throw new System.NotImplementedException();
         }
 
         public Transaction MapBack(TransactionDTO model)
         {
-            return new Transaction()
-            {
-                Sum = model.Sum,
-                Date = model.Date,
-                CategoryId = model.CategoryId,
-                SourceId = model.SourceId,
-                TargetId = model.TargetId
-            };
+            throw new System.NotImplementedException();
         }
 
         public Transaction MapUpdate(TransactionDTO model, Transaction entity)

@@ -7,25 +7,17 @@ namespace FinanceManager.BLL.Mappers
     {
         public CategoryDTO Map(Category entity)
         {
-            return new CategoryDTO()
-            {
-                Id = entity.Id,
-                Name = entity.Name
-            };
+            throw new System.NotImplementedException();
         }
 
         public Category MapBack(CategoryDTO model)
         {
-            return new Category()
-            {
-                Name = model.Name
-            };
+            throw new System.NotImplementedException();
         }
 
         public Category MapUpdate(CategoryDTO model, Category entity)
         {
-            entity.Name = model.Name;
-            return entity;
+            throw new System.NotImplementedException();
         }
     }
 }

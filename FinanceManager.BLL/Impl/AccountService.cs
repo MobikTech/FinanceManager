@@ -32,13 +32,9 @@ namespace FinanceManager.BLL.Implementation
             return _accountMapper.Map(result);
         }
 
-        public AccountDTO CheckAccountCount(AccountDTO dto)
+        public AccountDTO GetAccount(int id)
         {
-            if (dto.Number == null)
-            {
-                throw new NotImplementedException();
-            }
-            Account result = Database.AccountRepository.GetByNumber(dto.Number);
+            Account result = Database.AccountRepository.GetById(id);
             if (result == null)
             {
                 throw new NotImplementedException();
@@ -56,31 +52,22 @@ namespace FinanceManager.BLL.Implementation
             }
             return result.Select(_accountMapper.Map);
         }
-        
-        // public void UpdateCount(AccountDTO dto)
-        // {
-        //     if (dto.Number == null)
-        //     {
-        //         throw new NotImplementedException();
-        //     }
-        //     Account account = Database.AccountRepository.GetByNumber(dto.Number);
-        //     if (account == null)
-        //     {
-        //         throw new NotImplementedException();
-        //     }
-        //
-        //     account.Count = dto.Count;
-        //     Database.AccountRepository.Update(account);
-        //     Database.Save();
-        // }
 
-        public void DeleteAccount(AccountDTO dto)
+        public void UpdateAccount(AccountDTO dto)
         {
-            if (dto.Number == null)
+            Account account = Database.AccountRepository.GetById(dto.Id);
+            if (account == null)
             {
                 throw new NotImplementedException();
             }
-            Account account = Database.AccountRepository.GetByNumber(dto.Number);
+            account = _accountMapper.MapUpdate(dto, account);
+            Database.AccountRepository.Update(account);
+            Database.Save();
+        }
+
+        public void DeleteAccount(int id)
+        {
+            Account account = Database.AccountRepository.GetById(id);
             if (account == null)
             {
                 throw new NotImplementedException();

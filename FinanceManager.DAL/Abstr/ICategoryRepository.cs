@@ -4,6 +4,6 @@ namespace FinanceManager.DAL.Abstraction
 {
     public interface ICategoryRepository : IBaseRepository<Category>
     {
-        public Category GetCategoryByName(string name);
+        
     }
 }   

@@ -6,6 +6,6 @@ namespace FinanceManager.BLL.DTO
         
         public string Number { get; set; }
         
-        public decimal Count { get; set; }
+        public int Count { get; set; }
     }
 }
