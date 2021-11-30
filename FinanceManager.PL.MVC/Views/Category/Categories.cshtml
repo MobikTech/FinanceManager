@@ -1,0 +1,33 @@
+@model IEnumerable<CategoryViewModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Available categories</title>
+</head>
+<body>
+    <div>
+        <h3>Categories</h3>
+        <table>
+            <tr>
+                <td>Name</td>
+                @* <td></td> *@
+            </tr>
+            @foreach (var category in Model)
+            {
+                <tr>
+                    <td>@category.Name</td>
+                    @* <td> *@
+                    @*     <a href="~/Home/DeleteAccount/@account.Number">Delete</a> *@
+                    @* </td> *@
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

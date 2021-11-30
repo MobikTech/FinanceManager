@@ -29,7 +29,7 @@ namespace FinanceManager.PL.MVC.Mappers
             {
                 Number = model.Number,
                 Count = model.Count,
-                Id = _accountService.GetAccountByNumber(model.Number).Id
+                // Id = _accountService.GetAccountByNumber(model.Number).Id
             };
         }
     }

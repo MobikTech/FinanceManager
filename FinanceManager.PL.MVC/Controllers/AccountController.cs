@@ -19,18 +19,18 @@ namespace FinanceManager.PL.MVC.Controllers
             _accountViewMapper = accountViewMapper;
         }
 
+        #region Read
+
         [HttpGet]
         [ActionName("Accounts")]
         public IActionResult GetAllAccounts()
         {
             IEnumerable<AccountViewModel> accountViewModels = _accountService.GetAllAccounts()
-                .Select(dto => new AccountViewModel()
-                {
-                    Number = dto.Number,
-                    Count = dto.Count
-                });
+                .Select(dto => _accountViewMapper.Map(dto));
             return View(accountViewModels);
         }
+
+        #endregion
 
         #region Create
         
@@ -44,13 +44,8 @@ namespace FinanceManager.PL.MVC.Controllers
         [HttpPost]
         public IActionResult AddAccount(AccountViewModel model)
         {
-            AccountDTO createdAccount = _accountService.CreateAccount(new AccountDTO()
-            {
-                Number = model.Number,
-                Count = model.Count
-            });
+            AccountDTO createdAccount = _accountService.CreateAccount(_accountViewMapper.MapBack(model));
             return Json(createdAccount);
-            // return Content("Added " + createdAccount.Number);
         }
 
         #endregion
