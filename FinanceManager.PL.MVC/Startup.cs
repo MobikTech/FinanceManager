@@ -1,16 +1,12 @@
 using FinanceManager.BLL.Abstraction;
-using FinanceManager.BLL.DTO;
+using FinanceManager.BLL.Extensions;
 using FinanceManager.BLL.Implementation;
-using FinanceManager.BLL.Mappers;
-using FinanceManager.DAL.Abstraction;
-using FinanceManager.DAL.DB;
-using FinanceManager.DAL.Entities;
-using FinanceManager.DAL.Implementation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace FinanceManager.PL.MVC
 {
@@ -24,18 +20,7 @@ namespace FinanceManager.PL.MVC
     
         public void ConfigureServices(IServiceCollection services)
         {
-            
-            
-            // DAL
-            services.AddDbContext<FinanceManagerDbContext>(options => 
-                options.UseNpgsql(Configuration.GetConnectionString("Postgres")));
-            
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
-            
-            // BLL
-            services.AddTransient<IGeneralMapper<Account, AccountDTO>, AccountMapper>();
-            services.AddTransient<IGeneralMapper<Category, CategoryDTO>, CategoryMapper>();
-            services.AddTransient<IGeneralMapper<Transaction, TransactionDTO>, TransactionMapper>();
+            services.AddDalDependencies(Configuration);
             
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<ICategoryService, CategoryService>();
@@ -45,19 +30,19 @@ namespace FinanceManager.PL.MVC
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // if (env.IsDevelopment())
-            // {
-            //     app.UseDeveloperExceptionPage();
-            // }
-            // app.UseRouting();
-            //
-            // app.UseEndpoints(endpoints =>
-            // {
-            //     endpoints.MapGet("/", async context =>
-            //     {
-            //         await context.Response.WriteAsync("Hello World!");
-            //     });
-            // });
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            app.UseRouting();
+            
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapGet("/", async context =>
+                {
+                    await context.Response.WriteAsync("Hello World!");
+                });
+            });
         }
         
     }

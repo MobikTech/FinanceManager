@@ -8,7 +8,7 @@ namespace FinanceManager.BLL.Abstraction
     {
         public CategoryDTO CreateCategory(CategoryDTO dto);
         
-        public CategoryDTO GetCategory(int id);
+        public CategoryDTO GetCategoryById(int id);
         
         public CategoryDTO GetCategoryByName(string name);
 

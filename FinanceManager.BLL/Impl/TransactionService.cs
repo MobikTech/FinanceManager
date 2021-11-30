@@ -1,7 +1,6 @@
-using System;
-using System.Linq;
 using FinanceManager.BLL.Abstraction;
 using FinanceManager.BLL.DTO;
+using FinanceManager.BLL.ExceptionModels;
 using FinanceManager.BLL.Mappers;
 using FinanceManager.DAL.Abstraction;
 using FinanceManager.DAL.Entities;
@@ -25,7 +24,7 @@ namespace FinanceManager.BLL.Implementation
             Transaction result = Database.TransactionRepository.Create(transaction);
             if (result == null)
             {
-                throw new NotImplementedException();
+                throw new ValidationException("Couldn't make transaction", null);
             }
             if (dto.SourceId.HasValue)
             {

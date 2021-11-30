@@ -1,3 +1,5 @@
+using System;
+using FinanceManagement.DAL.Extensions;
 using FinanceManager.DAL.DB.EntityConfigurations;
 using FinanceManager.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +19,7 @@ namespace FinanceManager.DAL.DB
             modelBuilder.ApplyConfiguration(new AccountConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
+            modelBuilder.Seed();
             
         }
 

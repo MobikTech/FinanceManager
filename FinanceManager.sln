@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceManager.PL.ConsoleAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceManager.Tests", "FinanceManager.Tests\FinanceManager.Tests.csproj", "{48319D1A-48BE-43E7-8715-467E7489EEE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceManager.PL.MVC", "FinanceManager.PL.MVC\FinanceManager.PL.MVC.csproj", "{5FB5FE85-440A-4202-9D61-D5B0F425F902}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceManager.PL.MVC", "FinanceManager.PL.MVC\FinanceManager.PL.MVC.csproj", "{90ED476C-11FA-489B-BF7C-0DBB9BAD2ADF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,9 +32,9 @@ Global
 		{48319D1A-48BE-43E7-8715-467E7489EEE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48319D1A-48BE-43E7-8715-467E7489EEE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48319D1A-48BE-43E7-8715-467E7489EEE8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5FB5FE85-440A-4202-9D61-D5B0F425F902}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5FB5FE85-440A-4202-9D61-D5B0F425F902}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5FB5FE85-440A-4202-9D61-D5B0F425F902}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5FB5FE85-440A-4202-9D61-D5B0F425F902}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90ED476C-11FA-489B-BF7C-0DBB9BAD2ADF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90ED476C-11FA-489B-BF7C-0DBB9BAD2ADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90ED476C-11FA-489B-BF7C-0DBB9BAD2ADF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90ED476C-11FA-489B-BF7C-0DBB9BAD2ADF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

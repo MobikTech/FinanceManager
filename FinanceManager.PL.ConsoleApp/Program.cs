@@ -26,25 +26,6 @@ namespace FinanceManager.PL.ConsoleApp
             ITransactionService transactionService = serviceProvider.GetService<ITransactionService>();
             
             
-            accountService.CreateAccount(new AccountDTO()
-            {
-                Count = 1000,
-                Number = "1"
-            });
-            
-            categoryService.CreateCategory(new CategoryDTO()
-            {
-                Name = "products"
-            });
-            categoryService.CreateCategory(new CategoryDTO()
-            {
-                Name = "salary"
-            });
-            categoryService.CreateCategory(new CategoryDTO()
-            {
-                Name = "youtube premium"
-            });
-            
             transactionService.MakeTransaction(new TransactionDTO()
             {
                 Sum = 90,
