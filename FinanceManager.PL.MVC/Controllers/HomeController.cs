@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using FinanceManager.BLL.Abstraction;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using FinanceManager.PL.MVC.Models;
@@ -27,6 +28,13 @@ namespace FinanceManager.PL.MVC.Controllers
         {
             return View();
         }
+
+        // public IActionResult DeleteAccount(string number)
+        // {
+        //     
+        //     return View();
+        // }
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

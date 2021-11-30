@@ -1,6 +1,7 @@
 using FinanceManager.BLL.Abstraction;
 using FinanceManager.BLL.Extensions;
 using FinanceManager.BLL.Implementation;
+using FinanceManager.PL.MVC.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -21,10 +22,14 @@ namespace FinanceManager.PL.MVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDalDependencies(Configuration);
-            
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<ITransactionService, TransactionService>();
+
+            services.AddTransient<AccountViewMapper>();
+            
+            services.AddControllersWithViews();
+            
 
         }
 
@@ -34,16 +39,25 @@ namespace FinanceManager.PL.MVC
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
             app.UseRouting();
-            
+
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
-        
     }
 }

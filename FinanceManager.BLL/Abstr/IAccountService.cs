@@ -19,6 +19,6 @@ namespace FinanceManager.BLL.Abstraction
         
         public decimal CheckCosts(int accountId);
 
-        public bool DeleteAccount(string number);
+        public bool TryDeleteAccount(string number);
     }
 }

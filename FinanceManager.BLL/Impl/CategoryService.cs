@@ -33,11 +33,6 @@ namespace FinanceManager.BLL.Implementation
             }
             Category category = _categoryMapper.MapBack(dto);
             Category result = Database.CategoryRepository.Create(category);
-            // if (result == null)
-            // {
-            //     throw new ValidationException("Couldn't create category", null);
-            // }
-            
             Database.Save();
             return _categoryMapper.Map(result);
         }
@@ -67,15 +62,15 @@ namespace FinanceManager.BLL.Implementation
         public IEnumerable<CategoryDTO> GetAllCategories()
         {
             List<Category> result = Database.CategoryRepository.GetAll(); 
-            if (result == null)
-            {
-                throw new ValidationException("Here is no any category", null);
-            }
             return result.Select(_categoryMapper.Map);
         }
 
         public void UpdateCategory(CategoryDTO dto)
         {
+            if (dto.Name == null)
+            {
+                throw new ValidationException("Name cannot be null", null);
+            }
             Category category = Database.CategoryRepository.GetById(dto.Id);
             if (category == null)
             {
@@ -86,7 +81,7 @@ namespace FinanceManager.BLL.Implementation
             Database.Save();
         }
 
-        public void DeleteCategory(int id)
+        public bool DeleteCategory(int id)
         {
             Category category = Database.CategoryRepository.GetById(id);
             if (category == null)
@@ -95,6 +90,7 @@ namespace FinanceManager.BLL.Implementation
             }
             Database.CategoryRepository.Delete(category);
             Database.Save();
+            return true;
         }
     }
 }

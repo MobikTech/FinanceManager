@@ -2,12 +2,12 @@ namespace FinanceManager.PL.MVC.Models
 {
     public sealed class TransactionViewModel
     {
-        public int? SourceId { get; set; }
+        public string SourceNumber { get; set; }
         
-        public int? TargetId { get; set; }
+        public string TargetNumber { get; set; }
         
-        public float Sum { get; set; }
+        public decimal Sum { get; set; }
         
-        public int? CategoryId { get; set; }
+        public string CategoryName { get; set; }
     }
 }

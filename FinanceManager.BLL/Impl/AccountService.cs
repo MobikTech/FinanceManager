@@ -31,10 +31,6 @@ namespace FinanceManager.BLL.Implementation
             }
             Account account = _accountMapper.MapBack(dto);
             Account result = Database.AccountRepository.Create(account);
-            // if (result == null)
-            // {
-            //     throw new ValidationException("Couldn't create an account", null);
-            // }
             Database.Save();
             return _accountMapper.Map(result);
         }
@@ -64,10 +60,6 @@ namespace FinanceManager.BLL.Implementation
         public IEnumerable<AccountDTO> GetAllAccounts()
         {
             List<Account> result = Database.AccountRepository.GetAll(); 
-            // if (result == null)
-            // {
-            //     throw new ValidationException("Here is no any account", null);
-            // }
             return result.Select(_accountMapper.Map);
         }
 
@@ -124,7 +116,7 @@ namespace FinanceManager.BLL.Implementation
             return totalIncome;
         }
 
-        public bool DeleteAccount(string number)
+        public bool TryDeleteAccount(string number)
         {
             if (number == null)
             {

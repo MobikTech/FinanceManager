@@ -13,24 +13,7 @@ namespace FinanceManager.Tests
 {
     public class CategoryServiceTests : BaseServiceTests
     {
-        private ICategoryService _categoryService;
-        private ICategoryRepository _categoryRepository;
-        private IGeneralMapper<Category, CategoryDTO> _categporyMapper;
-        
-        
-        public CategoryServiceTests()
-        {
-            _categoryService = _serviceProvider.GetService<ICategoryService>();
-            _categoryRepository = _serviceProvider.GetService<IUnitOfWork>().CategoryRepository;
-            _categporyMapper = _serviceProvider.GetService<IGeneralMapper<Category, CategoryDTO>>();
-        }
-
-        [SetUp]
-        public void Setup()
-        {
-        }
-
-        #region CreateAccount
+        #region CreateCategory
 
         [Test]
         public void CreateCategory_CorrectCreating_CreatedAccountDTO()
@@ -55,7 +38,7 @@ namespace FinanceManager.Tests
 
         #endregion
 
-        #region GetAccountById
+        #region GetCategoryById
 
         [Test]
         public void GetCategoryById_CorrectPeeking_ReturnedCategoryDTO()
@@ -74,14 +57,14 @@ namespace FinanceManager.Tests
 
         #endregion
 
-        #region GetAccountByNumber
+        #region GetCategoryByName
 
         [Test]
         public void GetCategoryByName_CorrectPeeking_ReturnedCategoryDTO()
         {
-            string existedNumber = "Products";
+            string existedName = "Products";
             
-            CategoryDTO actual = _accountService.GetAccountByNumber(existedNumber);
+            CategoryDTO actual = _categoryService.GetCategoryByName(existedName);
 
             int expectedId = 1;
             Assert.AreEqual(expectedId, actual.Id);
@@ -90,47 +73,75 @@ namespace FinanceManager.Tests
         [Test]
         public void GetAccountByNumber_DoesntExist_Exception()
         {
-            Assert.Throws(typeof(ValidationException), () => _accountService.GetAccountByNumber("wrong_number"));
+            Assert.Throws(typeof(ValidationException), () => _categoryService.GetCategoryByName("wrong_name"));
         }
 
         #endregion
 
-        #region GetAllAccounts
+        #region GetAllACategories
 
         [Test]
-        public void GetAllAccounts_CorrectPeeking_ReturnedAccountsDTO()
+        public void GetAllCategories_CorrectPeeking_ReturnedCategoriesDTO()
         {
-            IEnumerable<AccountDTO> actual = _accountService.GetAllAccounts();
+            IEnumerable<CategoryDTO> actual = _categoryService.GetAllCategories();
 
-            IEnumerable<AccountDTO> expected = _accountRepository.GetAll()
-                .Select(account => _accountMapper.Map(account));
+            IEnumerable<CategoryDTO> expected = _categoryRepository.GetAll()
+                .Select(category => _categporyMapper.Map(category));
             Assert.AreEqual(expected.Count(), actual.Count());
         }
 
         #endregion
-
-        #region DeleteAccount
+        
+        #region UpdateCategory
 
         [Test]
-        public void DeleteAccount_CorrectDeleting_ReturnedTrue()
+        public void UpdateCategory_CorrectUpdating_Success()
         {
-            string existingNumber = "54321";
-
-            Assert.Multiple(() =>
+            int testedCategoryId = 2;
+            CategoryDTO newCategoryDto = new CategoryDTO()
             {
-                Assert.IsTrue(_accountService.DeleteAccount(existingNumber));
-                Assert.IsNull(_accountRepository.GetByNumber(existingNumber));
-            });
+                Id = testedCategoryId,
+                Name = "SalaryUpdated"
+            };
+            _categoryService.UpdateCategory(newCategoryDto);
+            Category actual = _categoryRepository.GetById(testedCategoryId);
+            Assert.AreEqual(newCategoryDto.Name, actual.Name);
         }
         
-        [TestCase(null)]
-        [TestCase("fffff")]
-        public void DeleteAccount_WrongNumber_Exception(string number)
+        [TestCase(2, null)]
+        [TestCase(-10, "TestName")]
+        public void UpdateCategory_WrongInputData_Exception(int id, string name)
         {
-            Assert.Throws(typeof(ValidationException), () => _accountService.DeleteAccount(number));
+            CategoryDTO newCategoryDto = new CategoryDTO()
+            {
+                Id = id,
+                Name = name
+            };
+            Assert.Throws(typeof(ValidationException), () => _categoryService.UpdateCategory(newCategoryDto));
         }
 
         #endregion
+
+        #region DeleteCategory
+
+        [Test]
+        public void DeleteCategory_CorrectDeleting_ReturnedTrue()
+        {
+            int existedId = 3;
+            Assert.Multiple(() =>
+            {
+                Assert.IsTrue(_categoryService.DeleteCategory(existedId));
+                Assert.IsNull(_categoryRepository.GetById(existedId));
+
+            });
+        }
         
+        [TestCase(-10)]
+        public void DeleteAccount_WrongNumber_Exception(int id)
+        {
+            Assert.Throws(typeof(ValidationException), () => _categoryService.DeleteCategory(id));
+        }
+
+        #endregion
     }
 }

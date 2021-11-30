@@ -16,6 +16,6 @@ namespace FinanceManager.BLL.Abstraction
         
         public void UpdateCategory(CategoryDTO dto);
         
-        public void DeleteCategory(int id);
+        public bool DeleteCategory(int id);
     }
 }

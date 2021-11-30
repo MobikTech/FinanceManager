@@ -1,42 +1,20 @@
 using System.Collections.Generic;
 using System.Linq;
-using FinanceManager.BLL.Abstraction;
 using FinanceManager.BLL.DTO;
 using FinanceManager.BLL.ExceptionModels;
-using FinanceManager.BLL.Mappers;
-using FinanceManager.DAL.Abstraction;
-using FinanceManager.DAL.Entities;
 using NUnit.Framework;
-using Microsoft.Extensions.DependencyInjection;
 
 
 namespace FinanceManager.Tests
 {
     public class AccountServiceTests : BaseServiceTests
     {
-        private IAccountService _accountService;
-        private IAccountRepository _accountRepository;
-        private IGeneralMapper<Account, AccountDTO> _accountMapper;
-        
-        
-        public AccountServiceTests()
-        {
-            _accountService = _serviceProvider.GetService<IAccountService>();
-            _accountRepository = _serviceProvider.GetService<IUnitOfWork>().AccountRepository;
-            _accountMapper = _serviceProvider.GetService<IGeneralMapper<Account, AccountDTO>>();
-        }
-
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         #region CreateAccount
 
         [Test]
         public void CreateAccount_CorrectCreating_CreatedAccountDTO()
         {
-            AccountDTO dto = new AccountDTO() {Number = "1111", Count = 0};
+            AccountDTO dto = new AccountDTO() {Number = "11111", Count = 0};
             Assert.Multiple(() =>
             {
                 Assert.DoesNotThrow(() => { _accountService.CreateAccount(dto);});
@@ -126,7 +104,7 @@ namespace FinanceManager.Tests
 
             Assert.Multiple(() =>
             {
-                Assert.IsTrue(_accountService.DeleteAccount(existingNumber));
+                Assert.IsTrue(_accountService.TryDeleteAccount(existingNumber));
                 Assert.IsNull(_accountRepository.GetByNumber(existingNumber));
             });
         }
@@ -135,10 +113,9 @@ namespace FinanceManager.Tests
         [TestCase("fffff")]
         public void DeleteAccount_WrongNumber_Exception(string number)
         {
-            Assert.Throws(typeof(ValidationException), () => _accountService.DeleteAccount(number));
+            Assert.Throws(typeof(ValidationException), () => _accountService.TryDeleteAccount(number));
         }
 
         #endregion
-        
     }
 }
