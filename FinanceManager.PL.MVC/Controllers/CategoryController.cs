@@ -22,8 +22,7 @@ namespace FinanceManager.PL.MVC.Controllers
         #region Read
 
         [HttpGet]
-        [ActionName("Categories")]
-        public IActionResult GetAllCategories()
+        public IActionResult Categories()
         {
             IEnumerable<CategoryViewModel> categoryViewModels = _categoryService.GetAllCategories()
                 .Select(dto => _categoryViewMapper.Map(dto));
@@ -35,32 +34,33 @@ namespace FinanceManager.PL.MVC.Controllers
         #region Create
         
         [HttpGet]
-        [ActionName("Create")]
-        public IActionResult AddCategory()
+        public IActionResult Create()
         {
             return View();
         }
         
         [HttpPost]
-        public IActionResult AddCategory(CategoryViewModel model)
+        public IActionResult Create(CategoryViewModel model)
         {
             CategoryDTO createdCategory = _categoryService.CreateCategory(_categoryViewMapper.MapBack(model));
-            return Json(createdCategory);
+            return RedirectToAction("Categories");
+            // return Json(createdCategory);
         }
 
         #endregion
 
         #region Delete
 
-        [HttpDelete]
-        [ActionName("Remove")]
-        public IActionResult RemoveCategory(int id)
+        [HttpGet]
+        public IActionResult Remove(CategoryViewModel model)
         {
-            AccountDTO dto = _categoryService.GetAccountByNumber(number);
-            AccountViewModel model = _accountViewMapper.Map(dto);
-            if (_categoryService.TryDeleteAccount(number))
+            CategoryDTO dto = _categoryService.GetCategoryByName(model.Name);
+            // CategoryDTO dto = _categoryService.GetCategoryById(id);
+            // CategoryViewModel model = _categoryViewMapper.Map(dto);
+            if (_categoryService.TryDeleteCategory(dto.Id))
             {
-                return Json(model);
+                return Redirect("~/Category/Categories");
+                // return Json(model);
             }
 
             return Content("Account was not removed");

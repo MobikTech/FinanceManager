@@ -77,11 +77,12 @@ namespace FinanceManager.BLL.Implementation
                 throw new ValidationException("Category doesn't exist", null);
             }
             category = _categoryMapper.MapUpdate(dto, category);
+            category.Name = dto.Name;
             Database.CategoryRepository.Update(category);
             Database.Save();
         }
 
-        public bool DeleteCategory(int id)
+        public bool TryDeleteCategory(int id)
         {
             Category category = Database.CategoryRepository.GetById(id);
             if (category == null)

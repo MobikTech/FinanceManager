@@ -27,6 +27,7 @@ namespace FinanceManager.PL.MVC
             services.AddTransient<ITransactionService, TransactionService>();
             services.AddTransient<AccountViewMapper>();
             services.AddTransient<CategoryViewMapper>();
+            services.AddTransient<TransactionViewMapper>();
             
             services.AddControllersWithViews();
             

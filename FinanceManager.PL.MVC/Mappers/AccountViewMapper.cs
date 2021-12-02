@@ -27,9 +27,9 @@ namespace FinanceManager.PL.MVC.Mappers
         {
             return new AccountDTO()
             {
+                Id = _accountService.GetAccountByNumber(model.Number).Id,
                 Number = model.Number,
-                Count = model.Count,
-                // Id = _accountService.GetAccountByNumber(model.Number).Id
+                Count = model.Count
             };
         }
     }

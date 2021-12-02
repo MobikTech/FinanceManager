@@ -130,7 +130,7 @@ namespace FinanceManager.Tests
             int existedId = 3;
             Assert.Multiple(() =>
             {
-                Assert.IsTrue(_categoryService.DeleteCategory(existedId));
+                Assert.IsTrue(_categoryService.TryDeleteCategory(existedId));
                 Assert.IsNull(_categoryRepository.GetById(existedId));
 
             });
@@ -139,7 +139,7 @@ namespace FinanceManager.Tests
         [TestCase(-10)]
         public void DeleteAccount_WrongNumber_Exception(int id)
         {
-            Assert.Throws(typeof(ValidationException), () => _categoryService.DeleteCategory(id));
+            Assert.Throws(typeof(ValidationException), () => _categoryService.TryDeleteCategory(id));
         }
 
         #endregion

@@ -1,0 +1,37 @@
+@model TransactionViewModel
+
+@{
+    ViewData["Title"] = "Transaction making";
+}
+
+<!DOCTYPE html>
+
+<html>
+<body>
+    <div>
+        <h3>Make transaction</h3>
+        @using (Html.BeginForm("Make", "Transaction", FormMethod.Post))
+        {
+            <p>
+                @Html.LabelFor(model => model.SourceNumber, "Input source account number") <br/>
+                @Html.EditorFor(model => model.SourceNumber)
+            </p>
+            <p>
+                @Html.LabelFor(model => model.TargetNumber, "Input target account number") <br/>
+                @Html.EditorFor(model => model.TargetNumber)
+            </p>
+            <p>
+                @Html.LabelFor(model => model.Sum, "Input sum of transaction") <br/>
+                @Html.EditorFor(model => model.Sum)
+            </p>
+            <p>
+                @Html.LabelFor(model => model.CategoryName, "Input category name") <br/>
+                @Html.EditorFor(model => model.CategoryName)
+            </p>
+            <p>
+                <input type="submit" value="Make" />
+            </p>            
+        }
+    </div>
+    </body>
+</html>

@@ -11,13 +11,8 @@ namespace FinanceManager.DAL.Implementation
         private IAccountRepository _accountRepository;
         private ICategoryRepository _categoryRepository;
         private ITransactionRepository _transactionRepository;
-        private bool disposed = false;
-        
-        // todo
-        // public UnitOfWork(FinanceManagerDbContext context)
-        // {
-        //     _context = context;
-        // }
+        private bool _disposed = false;
+
         public UnitOfWork(DbContextOptions<FinanceManagerDbContext> options)
         {
             _context = new FinanceManagerDbContext(options);
@@ -25,7 +20,9 @@ namespace FinanceManager.DAL.Implementation
 
         public IAccountRepository AccountRepository => _accountRepository ??= new AccountRepository(_context);
         public ICategoryRepository CategoryRepository => _categoryRepository ??= new CategoryRepository(_context);
-        public ITransactionRepository TransactionRepository => _transactionRepository ??= new TransactionRepository(_context);
+
+        public ITransactionRepository TransactionRepository =>
+            _transactionRepository ??= new TransactionRepository(_context);
 
         public void Save()
         {
@@ -34,14 +31,17 @@ namespace FinanceManager.DAL.Implementation
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (_disposed)
             {
-                if (disposing)
-                {
-                    _context.Dispose();
-                }
+                return;
             }
-            this.disposed = true;
+
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+
+            _disposed = true;
         }
 
         public void Dispose()

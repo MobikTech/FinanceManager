@@ -38,23 +38,4 @@ namespace FinanceManager.BLL.Util
             return services.BuildServiceProvider();
         }
     }
-    
-    
-    
-    
-    
-    // public sealed class ServiceModule : NinjectModule
-    // {
-    //     private readonly DbContextOptions<FinanceManagerDbContext> _options;
-    //
-    //     public ServiceModule(DbContextOptions<FinanceManagerDbContext> options)
-    //     {
-    //         _options = options;
-    //     }
-    //     
-    //     public override void Load()
-    //     {
-    //         Bind<IUnitOfWork>().To<UnitOfWork>().WithConstructorArgument(new FinanceManagerDbContext(_options));
-    //     }
-    // }
 }

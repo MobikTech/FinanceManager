@@ -1,31 +1,29 @@
+@model AccountViewModel
 @{
-    Layout = null;
+    // Layout = null;
+    ViewData["Title"] = "Account creating";
 }
 
 <!DOCTYPE html>
 
 <html>
-<head>
-    <title>Account adding window</title>
-</head>
     <body>
     <div>
-        <h3>Add new account</h3>    
-        <form method="post" action="~/Account/AddAccount">
-            <table>
-                <tr>
-                    <td>Number</td>
-                    <td><input type="text" name="Number" /></td>
-                </tr>
-                <tr>
-                    <td>Count</td>
-                    <td><input type="text" name="Count" /></td>
-                </tr>
-                <tr>
-                    <td><input type="submit" value="Add"/> </td><td></td>
-                </tr>
-            </table>
-        </form>
+        <h3>Add new account</h3>
+        @using (Html.BeginForm("Create", "Account", FormMethod.Post))
+        {
+            <p>
+                @Html.LabelFor(model => model.Number, "Input number") <br/>
+                @Html.EditorFor(model => model.Number)
+            </p>
+            <p>
+                @Html.LabelFor(model => model.Count, "Input count") <br/>
+                @Html.EditorFor(model => model.Count)
+            </p>
+            <p>
+                <input type="submit" value="Add" />
+            </p>            
+        }
     </div>
     </body>
 </html>

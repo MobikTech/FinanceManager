@@ -1,27 +1,35 @@
+@model CategoryViewModel
 @{
-    Layout = null;
+    ViewData["Title"] = "Category adding window";
 }
 
 <!DOCTYPE html>
 
 <html>
-<head>
-    <title>Category adding window</title>
-</head>
 <body>
 <div>
     <h3>Add new category</h3>    
-    <form method="post" action="~/Category/AddCategory">
-        <table>
-            <tr>
-                <td>Name</td>
-                <td><input type="text" name="Name" /></td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="Add"/> </td><td></td>
-            </tr>
-        </table>
-    </form>
+    @* <form method="post" action="~/Category/Create"> *@
+    @*     <table> *@
+    @*         <tr> *@
+    @*             <td>Name</td> *@
+    @*             <td><input type="text" name="Name" /></td> *@
+    @*         </tr> *@
+    @*         <tr> *@
+    @*             <td><input type="submit" value="Add"/> </td><td></td> *@
+    @*         </tr> *@
+    @*     </table> *@
+    @* </form> *@
+    @using (Html.BeginForm("Create", "Category", FormMethod.Post))
+    {
+        <p>
+            @Html.LabelFor(model => model.Name, "Please input category name") <br/>
+            @Html.EditorFor(model => model.Name)
+        </p>
+        <p>
+            <input type="submit" value="Create"/>
+        </p>
+    }
 </div>
 </body>
 </html>
