@@ -104,7 +104,7 @@ namespace FinanceManager.Tests
 
             Assert.Multiple(() =>
             {
-                Assert.IsTrue(_accountService.TryDeleteAccount(existingNumber));
+                Assert.IsTrue(_accountService.DeleteAccount(existingNumber));
                 Assert.IsNull(_accountRepository.GetByNumber(existingNumber));
             });
         }
@@ -113,7 +113,7 @@ namespace FinanceManager.Tests
         [TestCase("fffff")]
         public void DeleteAccount_WrongNumber_Exception(string number)
         {
-            Assert.Throws(typeof(ValidationException), () => _accountService.TryDeleteAccount(number));
+            Assert.Throws(typeof(ValidationException), () => _accountService.DeleteAccount(number));
         }
 
         #endregion

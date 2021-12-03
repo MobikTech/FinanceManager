@@ -23,10 +23,5 @@ namespace FinanceManager.BLL.Mappers
                 Number = model.Number
             };
         }
-
-        public Account MapUpdate(AccountDTO model, Account entity)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

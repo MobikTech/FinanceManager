@@ -11,19 +11,19 @@ namespace FinanceManager.DAL.DB.EntityConfigurations
             builder.HasKey(a => a.Id);
             
             builder
-                .HasOne(t => t.Source)
-                .WithMany(a => a.TransactionsAsSource)
-                .HasForeignKey(t => t.SourceId); 
+                .HasOne(transaction => transaction.Source)
+                .WithMany(account => account.TransactionsAsSource)
+                .HasForeignKey(transaction => transaction.SourceId); 
            
             builder
-                .HasOne(t => t.Target)
-                .WithMany(a => a.TransactionsAsTarget)
-                .HasForeignKey(t => t.TargetId);
+                .HasOne(transaction => transaction.Target)
+                .WithMany(account => account.TransactionsAsTarget)
+                .HasForeignKey(transaction => transaction.TargetId);
             
             builder
-                .HasOne(t => t.Category)
-                .WithMany(c => c.Transactions)
-                .HasForeignKey(t => t.CategoryId);
+                .HasOne(transaction => transaction.Category)
+                .WithMany(category => category.Transactions)
+                .HasForeignKey(transaction => transaction.CategoryId);
         }
     }
 }

@@ -21,11 +21,11 @@ namespace FinanceManager.BLL.Mappers
                 Name = model.Name
             };
         }
-
-        public Category MapUpdate(CategoryDTO model, Category entity)
-        {
-            entity.Name = model.Name;
-            return entity;
-        }
+        //
+        // public Category MapUpdate(CategoryDTO model, Category entity)
+        // {
+        //     entity.Name = model.Name;
+        //     return entity;
+        // }
     }
 }

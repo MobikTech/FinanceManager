@@ -1,3 +1,4 @@
+@model FinanceManager.BLL.DTO.AccountDTO
 @{
     ViewData["Title"] = "Account Info";
 }
@@ -26,9 +27,28 @@
             </td>
         </tr>
     </table>
-    @* @Html.ActionLink("Details", "Details", "Account") *@
+    
+    <form method="get" action="~/Account/CheckCount">
+        <p>
+            <input type="hidden" name="_accountId" value="@Model.Id"/>
+            @* @Html.HiddenFor(dto => dto.Id); *@
+        </p>
+        <p>
+            <label>Choose a check type</label>
+            @Html.DropDownList("checkType", Html.GetEnumSelectList(typeof(CheckType)))
+        </p>
+        <p>
+            <label>Choose a category</label>
+            @* @Html.DropDownList("categoryName", new SelectList()) *@
+            <input type="text" name="categoryName"/>
+        </p>
+        <p>
+            <input type="submit" value="Check"/>
+        </p>
+    </form>
     @* @using (Html.BeginForm("CheckCount", "Account", FormMethod.Get)) *@
     @* { *@
+    @*     @Html.HiddenFor(dto => dto.Id) *@
     @*     <p> *@
     @*         @Html.LabelFor(model => model.SourceNumber, "Input source account number") <br/> *@
     @*         @Html.EditorFor(model => model.SourceNumber) *@

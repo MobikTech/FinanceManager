@@ -29,10 +29,5 @@ namespace FinanceManager.BLL.Mappers
                 TargetId = model.TargetId
             };
         }
-
-        public Transaction MapUpdate(TransactionDTO model, Transaction entity)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

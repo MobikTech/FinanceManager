@@ -1,0 +1,50 @@
+@{
+    ViewData["Title"] = "Account Info";
+}
+
+<!DOCTYPE html>
+
+<html>
+<body>
+<div>
+    <h3>Account @ViewBag.CheckType Info</h3>
+    <table>
+        <tr>
+            <td>
+                <p>Number</p>
+            </td>
+            <td>
+                <p>Current count</p>
+            </td>
+            <td>
+                <p>Category</p>
+            </td>
+            <td>
+                <p>@ViewBag.CheckType</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>@ViewBag.Account.Number</p>
+            </td>
+            <td>
+                <p>@ViewBag.Account.Count</p>
+            </td>
+            <td>
+                @if (ViewBag.Category is not null)
+                {
+                    <p>@ViewBag.Category.Name</p>
+                }
+                else
+                {
+                    <p></p>
+                }
+            </td>
+            <td>
+                <p>@ViewBag.TotalSum</p>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

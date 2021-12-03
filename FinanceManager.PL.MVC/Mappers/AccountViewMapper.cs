@@ -1,5 +1,7 @@
+using System;
 using FinanceManager.BLL.Abstraction;
 using FinanceManager.BLL.DTO;
+using FinanceManager.BLL.ExceptionModels;
 using FinanceManager.BLL.Mappers;
 using FinanceManager.PL.MVC.Models;
 
@@ -25,9 +27,18 @@ namespace FinanceManager.PL.MVC.Mappers
 
         public AccountDTO MapBack(AccountViewModel model)
         {
+            int id = default;
+            try
+            {
+                id = _accountService.GetAccountByNumber(model.Number).Id;
+            }
+            catch(ValidationException)
+            {
+            }
+
             return new AccountDTO()
             {
-                Id = _accountService.GetAccountByNumber(model.Number).Id,
+                Id = id,
                 Number = model.Number,
                 Count = model.Count
             };

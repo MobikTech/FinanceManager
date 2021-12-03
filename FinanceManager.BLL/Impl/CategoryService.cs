@@ -71,13 +71,11 @@ namespace FinanceManager.BLL.Implementation
             {
                 throw new ValidationException("Name cannot be null", null);
             }
-            Category category = Database.CategoryRepository.GetById(dto.Id);
-            if (category == null)
+            if (Database.CategoryRepository.GetById(dto.Id) == null)
             {
                 throw new ValidationException("Category doesn't exist", null);
             }
-            category = _categoryMapper.MapUpdate(dto, category);
-            category.Name = dto.Name;
+            Category category = _categoryMapper.MapBack(dto);
             Database.CategoryRepository.Update(category);
             Database.Save();
         }

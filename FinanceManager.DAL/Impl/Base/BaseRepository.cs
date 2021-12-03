@@ -17,27 +17,27 @@ namespace FinanceManager.DAL.Implementation
             Context = context;
         }
 
-        public TEntity Create(TEntity entity)
+        public virtual TEntity Create(TEntity entity)
         {
             return DbSet.Add(entity).Entity;
         }
 
-        public List<TEntity> GetAll()
+        public virtual List<TEntity> GetAll()
         {
             return DbSet.ToList();
         }
 
-        public TEntity GetById(int id)
+        public virtual TEntity GetById(int id)
         {
             return DbSet.Find(id);
         }
 
-        public void Update(TEntity entity)
+        public virtual void Update(TEntity entity)
         {
             DbSet.Update(entity);
         }
 
-        public void Delete(TEntity entity)
+        public virtual void Delete(TEntity entity)
         {
             // if (Context.Entry(entity).State == EntityState.Detached)
             // {
@@ -46,16 +46,10 @@ namespace FinanceManager.DAL.Implementation
             DbSet.Remove(entity);
         }
         
-        public void Delete(int id)
-        {
-            TEntity entity = GetById(id);
-            Delete(entity);
-        }
-
-        //
-        // protected async Task SaveAsync()
+        // public virtual void Delete(int id)
         // {
-        //     await Context.SaveChangesAsync();
+        //     TEntity entity = GetById(id);
+        //     DbSet.Remove(entity);
         // }
     }
 }

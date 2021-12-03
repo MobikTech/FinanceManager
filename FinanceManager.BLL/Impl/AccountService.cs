@@ -116,20 +116,15 @@ namespace FinanceManager.BLL.Implementation
             return totalIncome;
         }
 
-        public bool TryDeleteAccount(string number)
+        public void DeleteAccount(int id)
         {
-            if (number == null)
-            {
-                throw new ValidationException("Number cannot be null", null);
-            }
-            Account account = Database.AccountRepository.GetByNumber(number);
+            Account account = Database.AccountRepository.GetById(id);
             if (account == null)
             {
                 throw new ValidationException("Account doesn't exist", null);
             }
             Database.AccountRepository.Delete(account);
             Database.Save();
-            return true;
         }
     }
 }

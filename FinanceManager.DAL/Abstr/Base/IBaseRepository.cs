@@ -17,6 +17,6 @@ namespace FinanceManager.DAL.Abstraction
         //DELETE
         public void Delete(TEntity entity);
 
-        public void Delete(int id);
+        // public void Delete(int id);
     }
 }

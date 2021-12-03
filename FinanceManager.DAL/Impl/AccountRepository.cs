@@ -10,12 +10,16 @@ namespace FinanceManager.DAL.Implementation
     {
         public AccountRepository(FinanceManagerDbContext context) : base(context) { }
         
-        public Account GetByNumber(string number)
-        {
-            return DbSet
+        public Account GetByNumber(string number) =>
+            DbSet
                 .Include(account => account.TransactionsAsSource)
                 .Include(account => account.TransactionsAsTarget)
                 .FirstOrDefault(account => account.Number == number);
-        }
+
+        public override Account GetById(int id) =>
+            DbSet
+                .Include(account => account.TransactionsAsSource)
+                .Include(account => account.TransactionsAsTarget)
+                .FirstOrDefault(account => account.Id == id);
     }
 }
