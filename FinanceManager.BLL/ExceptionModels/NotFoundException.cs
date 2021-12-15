@@ -6,6 +6,6 @@ namespace FinanceManager.BLL.ExceptionModels
     {
         public NotFoundException(Type entityType) : base(entityType) { }
 
-        public override string Message => base.Message + $"Cannot found an entity '{EntityType}'";
+        public override string Message => base.Message + $"Cannot found an entity '{EntityType.Name}'";
     }
 }

@@ -9,6 +9,6 @@ namespace FinanceManager.BLL.ExceptionModels
         {
             _nullField = nullField;
         }
-        public override string Message => $"{_nullField} in '{EntityType}' cannot be a null";
+        public override string Message => $"{_nullField} in '{EntityType.Name}' cannot be a null";
     }
 }

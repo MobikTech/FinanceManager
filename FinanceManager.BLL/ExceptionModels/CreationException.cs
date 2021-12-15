@@ -7,6 +7,6 @@ namespace FinanceManager.BLL.ExceptionModels
 
         public CreationException(Type entityType) : base(entityType) { }
 
-        public override string Message => base.Message + $"Couldn't create entity '{EntityType}'";
+        public override string Message => base.Message + $"Couldn't create entity '{EntityType.Name}'";
     }
 }

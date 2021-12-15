@@ -62,9 +62,9 @@ namespace FinanceManager.PL.MVC.Mappers
             return new TransactionDTO()
             {
                 //todo add transaction id getter
-                Id = default,
+                // Id = default,
                 Sum = model.Sum,
-                Date = default,
+                // Date = default,
                 SourceId = sourceId,
                 TargetId = targetId,
                 CategoryId = categoryId

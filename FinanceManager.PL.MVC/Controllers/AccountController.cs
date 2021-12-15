@@ -42,21 +42,13 @@ namespace FinanceManager.PL.MVC.Controllers
         [HttpGet]
         public IActionResult CheckCount(int _accountId, string categoryName, CheckType checkType)
         {
-            int? _categoryId;
-            try
-            {
-                _categoryId = _categoryService.GetCategoryByName(categoryName).Id;
-            }
-            catch (ValidationException)
-            {
-                _categoryId = null;
-            }
+            int? categoryId = categoryName is null ? null : _categoryService.GetCategoryByName(categoryName).Id;
             switch (checkType)  
             {
                 case CheckType.Income:
-                    return RedirectToAction("CheckIncome", new {accountId = _accountId, categoryId = _categoryId});
+                    return RedirectToAction("CheckIncome", new {accountId = _accountId, categoryId = categoryId});
                 case CheckType.Costs:
-                    return RedirectToAction("CheckCosts", new {accountId = _accountId, categoryId = _categoryId});
+                    return RedirectToAction("CheckCosts", new {accountId = _accountId, categoryId = categoryId});
                 default:
                     throw new ArgumentOutOfRangeException(nameof(checkType), checkType, null);
             }
@@ -66,7 +58,7 @@ namespace FinanceManager.PL.MVC.Controllers
         public IActionResult CheckIncome(int accountId, int? categoryId)
         {
             decimal totalIncome = categoryId.HasValue 
-                ? _accountService.CheckIncome(accountId, categoryId.Value) 
+                ? _accountService.CheckIncome(categoryId.Value, accountId) 
                 : _accountService.CheckIncome(accountId);
             
             ViewBag.Account = _accountService.GetAccountById(accountId);
@@ -84,7 +76,7 @@ namespace FinanceManager.PL.MVC.Controllers
         public IActionResult CheckCosts(int accountId, int? categoryId)
         {
             decimal totalCosts = categoryId.HasValue 
-                ? _accountService.CheckCosts(accountId, categoryId.Value) 
+                ? _accountService.CheckCosts(categoryId.Value, accountId) 
                 : _accountService.CheckCosts(accountId);
             
             ViewBag.Account = _accountService.GetAccountById(accountId);

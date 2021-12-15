@@ -1,7 +1,6 @@
-@model IEnumerable<CategoryViewModel>
+@model IEnumerable<FinanceManager.BLL.DTO.CategoryDTO>
 
 @{
-    // Layout = null;
     ViewData["Title"] = "Available categories";
 }
 
@@ -30,9 +29,7 @@
                     </td>
                     <td>
                         <p>
-                            @* @Html.ActionLink("Update", "EditBook", new {id = b.Id}) | *@
-                            @* @Html.ActionLink("Delete", "Remove", new {number = account.Number}) *@
-                            @Html.RouteLink("Delete", new { controller = "Category", action = "Remove", model = category })
+                            @Html.ActionLink("Delete", "Remove", new { id = category.Id })
                         </p>
                     </td>
                 </tr>

@@ -27,18 +27,8 @@ namespace FinanceManager.PL.MVC.Mappers
 
         public AccountDTO MapBack(AccountViewModel model)
         {
-            int id = default;
-            try
-            {
-                id = _accountService.GetAccountByNumber(model.Number).Id;
-            }
-            catch(ValidationException)
-            {
-            }
-
             return new AccountDTO()
             {
-                Id = id,
                 Number = model.Number,
                 Count = model.Count
             };

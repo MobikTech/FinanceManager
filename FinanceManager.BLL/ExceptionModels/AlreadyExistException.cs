@@ -6,6 +6,6 @@ namespace FinanceManager.BLL.ExceptionModels
     {
         public AlreadyExistException(Type entityType) : base(entityType) { }
 
-        public override string Message => base.Message + $"Already exists the same '{EntityType}' entity";
+        public override string Message => base.Message + $"Already exists the same '{EntityType.Name}' entity";
     }
 }

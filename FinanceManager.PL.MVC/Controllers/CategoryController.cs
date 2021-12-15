@@ -24,9 +24,8 @@ namespace FinanceManager.PL.MVC.Controllers
         [HttpGet]
         public IActionResult Categories()
         {
-            IEnumerable<CategoryViewModel> categoryViewModels = _categoryService.GetAllCategories()
-                .Select(dto => _categoryViewMapper.Map(dto));
-            return View(categoryViewModels);
+            IEnumerable<CategoryDTO> categoryDTOs = _categoryService.GetAllCategories();
+            return View(categoryDTOs);
         }
 
         #endregion
@@ -52,15 +51,11 @@ namespace FinanceManager.PL.MVC.Controllers
         #region Delete
 
         [HttpGet]
-        public IActionResult Remove(CategoryViewModel model)
+        public IActionResult Remove(int id)
         {
-            CategoryDTO dto = _categoryService.GetCategoryByName(model.Name);
-            // CategoryDTO dto = _categoryService.GetCategoryById(id);
-            // CategoryViewModel model = _categoryViewMapper.Map(dto);
-            if (_categoryService.TryDeleteCategory(dto.Id))
+            if (_categoryService.TryDeleteCategory(id))
             {
                 return Redirect("~/Category/Categories");
-                // return Json(model);
             }
 
             return Content("Account was not removed");
