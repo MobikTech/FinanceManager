@@ -97,24 +97,24 @@ namespace FinanceManager.Tests
 
         #region DeleteAccount
 
-        [Test]
-        public void DeleteAccount_CorrectDeleting_ReturnedTrue()
-        {
-            string existingNumber = "54321";
-
-            Assert.Multiple(() =>
-            {
-                Assert.IsTrue(_accountService.DeleteAccount(existingNumber));
-                Assert.IsNull(_accountRepository.GetByNumber(existingNumber));
-            });
-        }
-        
-        [TestCase(null)]
-        [TestCase("fffff")]
-        public void DeleteAccount_WrongNumber_Exception(string number)
-        {
-            Assert.Throws(typeof(ValidationException), () => _accountService.DeleteAccount(number));
-        }
+        // [Test]
+        // public void DeleteAccount_CorrectDeleting_ReturnedTrue()
+        // {
+        //     string existingNumber = "54321";
+        //
+        //     Assert.Multiple(() =>
+        //     {
+        //         Assert.IsTrue(_accountService.DeleteAccount(existingNumber));
+        //         Assert.IsNull(_accountRepository.GetByNumber(existingNumber));
+        //     });
+        // }
+        //
+        // [TestCase(null)]
+        // [TestCase("fffff")]
+        // public void DeleteAccount_WrongNumber_Exception(string number)
+        // {
+        //     Assert.Throws(typeof(ValidationException), () => _accountService.DeleteAccount(number));
+        // }
 
         #endregion
     }

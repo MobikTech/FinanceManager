@@ -1,5 +1,4 @@
-using System;
-using System.Net.Http;
+using FinanceManagement.BLL.Impl.Base;
 using FinanceManager.BLL.Abstraction;
 using FinanceManager.BLL.DTO;
 using FinanceManager.BLL.ExceptionModels;
@@ -7,7 +6,7 @@ using FinanceManager.BLL.Mappers;
 using FinanceManager.DAL.Abstraction;
 using FinanceManager.DAL.Entities;
 
-namespace FinanceManager.BLL.Implementation
+namespace FinanceManagement.BLL.Impl
 {
     public class TransactionService : BaseService<IUnitOfWork>, ITransactionService
     {
@@ -26,17 +25,17 @@ namespace FinanceManager.BLL.Implementation
                 (dto.SourceId is not null && dto.TargetId is not null && dto.CategoryId is not null)
                 )
             {
-                throw new ValidationException("Cannot to make this transaction", null);
+                throw new ValidationException("Cannot to make this transaction");
             }
             if (dto.Sum <= 0)
             {
-                throw new ValidationException("Transaction sum cannot be zero or less", null);
+                throw new ValidationException("Transaction sum cannot be zero or less");
             }
 
             if (dto.SourceId.HasValue &&
                 dto.Sum > Database.AccountRepository.GetById(dto.SourceId.Value).Count)
             {
-                throw new ValidationException("There are not enough funds in the account", null);
+                throw new ValidationException("There are not enough funds in the account");
             }
             Transaction transaction = _transactionMapper.MapBack(dto);
             Transaction result = Database.TransactionRepository.Create(transaction);

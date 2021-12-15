@@ -1,26 +1,33 @@
 using FinanceManagement.BLL.Impl;
 using FinanceManager.BLL.Abstraction;
 using FinanceManager.BLL.Extensions;
-using FinanceManager.PL.MVC.Mappers;
+using FinanceManager.PL.WebApi.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
-namespace FinanceManager.PL.MVC
+namespace FinanceManager.PL.WebApi
 {
-    public sealed class Startup
+    public class Startup
     {
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
+
         public IConfiguration Configuration { get; }
-    
+
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "FinanceManager.PL.WebApi", Version = "v1"});
+            });
+            
             services.AddDalDependencies(Configuration);
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<ICategoryService, CategoryService>();
@@ -28,10 +35,6 @@ namespace FinanceManager.PL.MVC
             services.AddTransient<AccountViewMapper>();
             services.AddTransient<CategoryViewMapper>();
             services.AddTransient<TransactionViewMapper>();
-            
-            services.AddControllersWithViews();
-            
-
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -39,27 +42,21 @@ namespace FinanceManager.PL.MVC
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "FinanceManager.PL.WebApi v1");
+                    c.RoutePrefix = "swagger";
+                });
             }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-            app.UseExceptionHandler("/Home/Error");
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Account}/{action=Accounts}/{id?}");
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

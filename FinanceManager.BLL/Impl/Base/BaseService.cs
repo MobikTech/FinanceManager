@@ -1,4 +1,4 @@
-namespace FinanceManager.BLL.Implementation
+namespace FinanceManagement.BLL.Impl.Base
 {
     public class BaseService<TUnitOfWork>
     {

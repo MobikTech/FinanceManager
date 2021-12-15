@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceManager.Tests", "Fin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceManager.PL.MVC", "FinanceManager.PL.MVC\FinanceManager.PL.MVC.csproj", "{90ED476C-11FA-489B-BF7C-0DBB9BAD2ADF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceManager.PL.WebApi", "FinanceManager.PL.WebApi\FinanceManager.PL.WebApi.csproj", "{44C4B59C-7970-4ADD-A5CB-C1CD1FAA9AE5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{90ED476C-11FA-489B-BF7C-0DBB9BAD2ADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90ED476C-11FA-489B-BF7C-0DBB9BAD2ADF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90ED476C-11FA-489B-BF7C-0DBB9BAD2ADF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44C4B59C-7970-4ADD-A5CB-C1CD1FAA9AE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44C4B59C-7970-4ADD-A5CB-C1CD1FAA9AE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44C4B59C-7970-4ADD-A5CB-C1CD1FAA9AE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44C4B59C-7970-4ADD-A5CB-C1CD1FAA9AE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

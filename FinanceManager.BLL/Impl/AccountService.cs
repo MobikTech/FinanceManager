@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using FinanceManagement.BLL.Impl.Base;
 using FinanceManager.BLL.Abstraction;
 using FinanceManager.BLL.DTO;
 using FinanceManager.BLL.ExceptionModels;
@@ -7,7 +8,7 @@ using FinanceManager.BLL.Mappers;
 using FinanceManager.DAL.Abstraction;
 using FinanceManager.DAL.Entities;
 
-namespace FinanceManager.BLL.Implementation
+namespace FinanceManagement.BLL.Impl
 {
     public class AccountService : BaseService<IUnitOfWork>, IAccountService
     {
@@ -23,11 +24,11 @@ namespace FinanceManager.BLL.Implementation
         {
             if (dto.Number == null)
             {
-                throw new ValidationException("Number cannot be a null", null);
+                throw new NullException(typeof(Account), "Number");
             }
             if (Database.AccountRepository.GetByNumber(dto.Number) != null)
             {
-                throw new ValidationException("Already exists account with the same number", null);
+                throw new AlreadyExistException(typeof(Account));
             }
             Account account = _accountMapper.MapBack(dto);
             Account result = Database.AccountRepository.Create(account);
@@ -40,7 +41,7 @@ namespace FinanceManager.BLL.Implementation
             Account account = Database.AccountRepository.GetById(id);
             if (account == null)
             {
-                throw new ValidationException("Account doesn't exist", null);
+                throw new NotFoundException(typeof(Account));
             }
 
             return _accountMapper.Map(account);
@@ -51,7 +52,7 @@ namespace FinanceManager.BLL.Implementation
             Account account = Database.AccountRepository.GetByNumber(number);
             if (account == null)
             {
-                throw new ValidationException("Account doesn't exist", null);
+                throw new NotFoundException(typeof(Account));
             }
 
             return _accountMapper.Map(account);
@@ -68,7 +69,7 @@ namespace FinanceManager.BLL.Implementation
             Account account = Database.AccountRepository.GetById(accountId);
             if (account == null)
             {
-                throw new ValidationException("Account doesn't exist", null);
+                throw new NotFoundException(typeof(Account));
             }
             decimal totalIncome = account.TransactionsAsTarget
                 .Where(transaction => transaction.CategoryId == categoryId)
@@ -81,7 +82,7 @@ namespace FinanceManager.BLL.Implementation
             Account account = Database.AccountRepository.GetById(accountId);
             if (account == null)
             {
-                throw new ValidationException("Account doesn't exist", null);
+                throw new NotFoundException(typeof(Account));
             }
             decimal totalIncome = account.TransactionsAsSource
                 .Where(transaction => transaction.CategoryId == categoryId)
@@ -95,7 +96,7 @@ namespace FinanceManager.BLL.Implementation
             Account account = Database.AccountRepository.GetById(accountId);
             if (account == null)
             {
-                throw new ValidationException("Account doesn't exist", null);
+                throw new NotFoundException(typeof(Account));
             }
             decimal totalIncome = account.TransactionsAsTarget
                 .Select(transaction => transaction.Sum)
@@ -108,7 +109,7 @@ namespace FinanceManager.BLL.Implementation
             Account account = Database.AccountRepository.GetById(accountId);
             if (account == null)
             {
-                throw new ValidationException("Account doesn't exist", null);
+                throw new NotFoundException(typeof(Account));
             }
             decimal totalIncome = account.TransactionsAsSource
                 .Select(transaction => transaction.Sum)
@@ -121,7 +122,7 @@ namespace FinanceManager.BLL.Implementation
             Account account = Database.AccountRepository.GetById(id);
             if (account == null)
             {
-                throw new ValidationException("Account doesn't exist", null);
+                throw new NotFoundException(typeof(Account));
             }
             Database.AccountRepository.Delete(account);
             Database.Save();

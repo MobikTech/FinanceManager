@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using FinanceManagement.BLL.Impl.Base;
 using FinanceManager.BLL.Abstraction;
 using FinanceManager.BLL.DTO;
 using FinanceManager.BLL.ExceptionModels;
@@ -8,7 +8,7 @@ using FinanceManager.BLL.Mappers;
 using FinanceManager.DAL.Abstraction;
 using FinanceManager.DAL.Entities;
 
-namespace FinanceManager.BLL.Implementation
+namespace FinanceManagement.BLL.Impl
 {
     public class CategoryService : BaseService<IUnitOfWork>, ICategoryService
     {
@@ -25,11 +25,11 @@ namespace FinanceManager.BLL.Implementation
         {
             if (dto.Name == null)
             {
-                throw new ValidationException("Name cannot be a null", null);
+                throw new NullException(typeof(Category), "Name");
             }
             if (Database.CategoryRepository.GetCategoryByName(dto.Name) != null)
             {
-                throw new ValidationException("Already exists category with the same name", null);
+                throw new AlreadyExistException(typeof(Category));
             }
             Category category = _categoryMapper.MapBack(dto);
             Category result = Database.CategoryRepository.Create(category);
@@ -42,7 +42,7 @@ namespace FinanceManager.BLL.Implementation
             Category result = Database.CategoryRepository.GetById(id);
             if (result == null)
             {
-                throw new ValidationException("Category doesn't exist", null);
+                throw new NotFoundException(typeof(Category));
             }
 
             return _categoryMapper.Map(result);
@@ -53,7 +53,7 @@ namespace FinanceManager.BLL.Implementation
             Category result = Database.CategoryRepository.GetCategoryByName(name);
             if (result == null)
             {
-                throw new ValidationException("Category doesn't exist", null);
+                throw new NotFoundException(typeof(Category));
             }
 
             return _categoryMapper.Map(result);
@@ -69,11 +69,11 @@ namespace FinanceManager.BLL.Implementation
         {
             if (dto.Name == null)
             {
-                throw new ValidationException("Name cannot be null", null);
+                throw new NullException(typeof(Category), "Name");
             }
             if (Database.CategoryRepository.GetById(dto.Id) == null)
             {
-                throw new ValidationException("Category doesn't exist", null);
+                throw new NotFoundException(typeof(Category));
             }
             Category category = _categoryMapper.MapBack(dto);
             Database.CategoryRepository.Update(category);
@@ -85,7 +85,7 @@ namespace FinanceManager.BLL.Implementation
             Category category = Database.CategoryRepository.GetById(id);
             if (category == null)
             {
-                throw new ValidationException("Category doesn't exist", null);
+                throw new NotFoundException(typeof(Category));
             }
             Database.CategoryRepository.Delete(category);
             Database.Save();
