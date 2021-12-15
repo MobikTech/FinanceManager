@@ -1,6 +1,6 @@
 using System;
 
-namespace FinanceManager.DAL.Abstraction
+namespace FinanceManager.DAL.Abstr.UoWs
 {
     public interface IUnitOfWork : IDisposable
     {

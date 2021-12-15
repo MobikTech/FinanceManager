@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace FinanceManager.DAL.Abstraction
+namespace FinanceManager.DAL.Abstr
 {
     public interface IBaseRepository<TEntity>
     {

@@ -1,10 +1,10 @@
 using System.Linq;
-using FinanceManager.DAL.Abstraction;
+using FinanceManager.DAL.Abstr;
 using FinanceManager.DAL.DB;
 using FinanceManager.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace FinanceManager.DAL.Implementation
+namespace FinanceManager.DAL.Impl
 {
     public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
     {

@@ -1,20 +1,19 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using FinanceManager.DAL.Abstraction;
+using FinanceManager.DAL.Abstr;
 using FinanceManager.DAL.DB;
 using Microsoft.EntityFrameworkCore;
 
-namespace FinanceManager.DAL.Implementation
+namespace FinanceManager.DAL.Impl
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
-        protected readonly FinanceManagerDbContext Context;
-        protected DbSet<TEntity> DbSet => Context.Set<TEntity>();
+        private readonly FinanceManagerDbContext _context;
+        protected DbSet<TEntity> DbSet => _context.Set<TEntity>();
 
-        public BaseRepository(FinanceManagerDbContext context)
+        protected BaseRepository(FinanceManagerDbContext context)
         {
-            Context = context;
+            _context = context;
         }
 
         public virtual TEntity Create(TEntity entity)

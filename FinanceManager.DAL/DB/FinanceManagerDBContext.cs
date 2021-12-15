@@ -1,12 +1,12 @@
 using System;
-using FinanceManagement.DAL.Extensions;
-using FinanceManager.DAL.DB.EntityConfigurations;
+using FinanceManager.DAL.DB.EntitiesConfigurations;
 using FinanceManager.DAL.Entities;
+using FinanceManager.DAL.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinanceManager.DAL.DB
 {
-    public class FinanceManagerDbContext : DbContext
+    public sealed class FinanceManagerDbContext : DbContext
     {
         public FinanceManagerDbContext(DbContextOptions<FinanceManagerDbContext> options) : base(options)
         {

@@ -1,7 +1,7 @@
 using FinanceManager.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace FinanceManagement.DAL.Extensions
+namespace FinanceManager.DAL.Extensions
 {
     public static class ModelBuilderExtensions
     {

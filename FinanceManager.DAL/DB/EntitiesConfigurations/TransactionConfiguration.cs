@@ -2,7 +2,7 @@ using FinanceManager.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FinanceManager.DAL.DB.EntityConfigurations
+namespace FinanceManager.DAL.DB.EntitiesConfigurations
 {
     public class TransactionConfiguration : IEntityTypeConfiguration<Transaction>
     {

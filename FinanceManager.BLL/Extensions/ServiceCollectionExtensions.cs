@@ -1,16 +1,16 @@
 using FinanceManager.BLL.DTO;
 using FinanceManager.BLL.Mappers;
-using FinanceManager.DAL.Abstraction;
+using FinanceManager.DAL.Abstr.UoWs;
 using FinanceManager.DAL.DB;
 using FinanceManager.DAL.Entities;
-using FinanceManager.DAL.Implementation;
+using FinanceManager.DAL.Impl.UoWs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace FinanceManager.BLL.Extensions
 {
-    public static class IServiceCollecitonExtensions
+    public static class ServiceCollectionExtensions
     {
         public static void AddDalDependencies(this IServiceCollection services, IConfiguration configuration)
         {

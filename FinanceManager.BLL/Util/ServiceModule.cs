@@ -1,11 +1,11 @@
-using FinanceManagement.BLL.Impl;
 using FinanceManager.BLL.Abstraction;
 using FinanceManager.BLL.DTO;
+using FinanceManager.BLL.Impl;
 using FinanceManager.BLL.Mappers;
-using FinanceManager.DAL.Abstraction;
+using FinanceManager.DAL.Abstr.UoWs;
 using FinanceManager.DAL.DB;
 using FinanceManager.DAL.Entities;
-using FinanceManager.DAL.Implementation;
+using FinanceManager.DAL.Impl.UoWs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 

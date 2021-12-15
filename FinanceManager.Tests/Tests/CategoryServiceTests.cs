@@ -4,7 +4,6 @@ using FinanceManager.BLL.Abstraction;
 using FinanceManager.BLL.DTO;
 using FinanceManager.BLL.ExceptionModels;
 using FinanceManager.BLL.Mappers;
-using FinanceManager.DAL.Abstraction;
 using FinanceManager.DAL.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;

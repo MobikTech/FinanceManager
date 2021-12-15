@@ -1,7 +1,6 @@
-
 using FinanceManager.DAL.Entities;
 
-namespace FinanceManager.DAL.Abstraction
+namespace FinanceManager.DAL.Abstr
 {
     public interface IAccountRepository : IBaseRepository<Account>
     {

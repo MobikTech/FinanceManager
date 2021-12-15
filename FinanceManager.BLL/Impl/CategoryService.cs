@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
-using FinanceManagement.BLL.Impl.Base;
 using FinanceManager.BLL.Abstraction;
 using FinanceManager.BLL.DTO;
 using FinanceManager.BLL.ExceptionModels;
 using FinanceManager.BLL.Mappers;
-using FinanceManager.DAL.Abstraction;
+using FinanceManager.DAL.Abstr.UoWs;
 using FinanceManager.DAL.Entities;
 
-namespace FinanceManagement.BLL.Impl
+namespace FinanceManager.BLL.Impl
 {
     public class CategoryService : BaseService<IUnitOfWork>, ICategoryService
     {

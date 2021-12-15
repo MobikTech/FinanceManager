@@ -1,8 +1,8 @@
-using FinanceManager.DAL.Abstraction;
+using FinanceManager.DAL.Abstr;
 using FinanceManager.DAL.DB;
 using FinanceManager.DAL.Entities;
 
-namespace FinanceManager.DAL.Implementation
+namespace FinanceManager.DAL.Impl
 {
     public class TransactionRepository : BaseRepository<Transaction>, ITransactionRepository
     {

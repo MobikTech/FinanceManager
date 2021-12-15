@@ -1,10 +1,10 @@
-namespace FinanceManagement.BLL.Impl.Base
+namespace FinanceManager.BLL.Impl
 {
     public class BaseService<TUnitOfWork>
     {
         protected TUnitOfWork Database { get; }
 
-        public BaseService(TUnitOfWork uow)
+        protected BaseService(TUnitOfWork uow)
         {
             Database = uow;
         }

@@ -1,11 +1,12 @@
 using System;
-using FinanceManager.DAL.Abstraction;
+using FinanceManager.DAL.Abstr;
+using FinanceManager.DAL.Abstr.UoWs;
 using FinanceManager.DAL.DB;
 using Microsoft.EntityFrameworkCore;
 
-namespace FinanceManager.DAL.Implementation
+namespace FinanceManager.DAL.Impl.UoWs
 {
-    public class UnitOfWork : IUnitOfWork
+    public sealed class UnitOfWork : IUnitOfWork
     {
         private readonly FinanceManagerDbContext _context;
         private IAccountRepository _accountRepository;
@@ -29,7 +30,7 @@ namespace FinanceManager.DAL.Implementation
             _context.SaveChanges();
         }
 
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
             if (_disposed)
             {
