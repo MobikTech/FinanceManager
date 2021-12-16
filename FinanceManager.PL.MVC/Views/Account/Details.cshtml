@@ -31,7 +31,6 @@
     <form method="get" action="~/Account/CheckCount">
         <p>
             <input type="hidden" name="_accountId" value="@Model.Id"/>
-            @* @Html.HiddenFor(dto => dto.Id); *@
         </p>
         <p>
             <label>Choose a check type</label>
@@ -39,29 +38,13 @@
         </p>
         <p>
             <label>Choose a category</label>
-            @* @Html.DropDownList("categoryName", new SelectList()) *@
-            <input type="text" name="categoryName"/>
+            @Html.DropDownList("categoryName", ViewBag.Categories as SelectList)
+            @* <input type="text" name="categoryName"/> *@
         </p>
         <p>
             <input type="submit" value="Check"/>
         </p>
     </form>
-    @* @using (Html.BeginForm("CheckCount", "Account", FormMethod.Get)) *@
-    @* { *@
-    @*     @Html.HiddenFor(dto => dto.Id) *@
-    @*     <p> *@
-    @*         @Html.LabelFor(model => model.SourceNumber, "Input source account number") <br/> *@
-    @*         @Html.EditorFor(model => model.SourceNumber) *@
-    @*     </p> *@
-    @*     <p> *@
-    @*         @Html.LabelFor(model => model.TargetNumber, "Input target account number") <br/> *@
-    @*         @Html.EditorFor(model => model.TargetNumber) *@
-    @*     </p> *@
-    @*     <p> *@
-    @*         <input type="submit" name="income" value="Check income"/> *@
-    @*         <input type="submit" name="costs" value="Check costs"/> *@
-    @*     </p> *@
-    @* } *@
 </div>
 </body>
 </html>

@@ -27,9 +27,9 @@ namespace FinanceManager.PL.WebApi.Controllers
             _categoryService.GetAllCategories().Select(dto => _categoryViewMapper.Map(dto)).ToList();
 
         [HttpGet]
-        [Route("get")]
-        public CategoryViewModel Get([FromQuery] int categoryId) =>
-            _categoryViewMapper.Map(_categoryService.GetCategoryById(categoryId));
+        [Route("{id:int}")]
+        public CategoryViewModel Get([FromRoute] int id) =>
+            _categoryViewMapper.Map(_categoryService.GetCategoryById(id));
 
         #endregion
 
@@ -44,8 +44,8 @@ namespace FinanceManager.PL.WebApi.Controllers
         #region Delete
 
         [HttpDelete]
-        [Route("delete")]
-        public void Remove([FromQuery] int categoryId) => _categoryService.TryDeleteCategory(categoryId);
+        [Route("{id:int}")]
+        public void Remove([FromRoute] int id) => _categoryService.TryDeleteCategory(id);
 
         #endregion
     }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using FinanceManager.BLL.Abstraction;
 using FinanceManager.PL.WebApi.Mappers;
@@ -27,16 +28,16 @@ namespace FinanceManager.PL.WebApi.Controllers
             _accountService.GetAllAccounts().Select(dto => _accountViewMapper.Map(dto)).ToList();
 
         [HttpGet]
-        [Route("get")]
-        public AccountViewModel Get([FromQuery] int accountId) => _accountViewMapper.Map(_accountService.GetAccountById(accountId));
+        [Route("{id:int}")]
+        public AccountViewModel Get([FromRoute] int id) => _accountViewMapper.Map(_accountService.GetAccountById(id));
 
         [HttpGet]
         [Route("income")]
-        public decimal CheckIncome([FromQuery] int accountId, int? categoryId) => CheckIncomePrivate(accountId, categoryId);
+        public decimal CheckIncome([Required] int accountId, int? categoryId) => CheckIncomePrivate(accountId, categoryId);
         
         [HttpGet]
         [Route("costs")]
-        public decimal CheckCosts([FromQuery] int accountId, int? categoryId) => CheckCostsPrivate(accountId, categoryId);
+        public decimal CheckCosts([Required] int accountId, int? categoryId) => CheckCostsPrivate(accountId, categoryId);
         
         #endregion
 
@@ -51,8 +52,8 @@ namespace FinanceManager.PL.WebApi.Controllers
         #region Delete
 
         [HttpDelete]
-        [Route("delete")]
-        public void Remove([FromQuery] int accountId) => _accountService.DeleteAccount(accountId);
+        [Route("{id:int}")]
+        public void Remove([FromRoute] int id) => _accountService.DeleteAccount(id);
 
         #endregion
         
